@@ -10,12 +10,12 @@ de la pagina web parera realizara apuestas.
 En este proyecto Como usuario de FCapuestas de apuestas en linea se desea gerera rentabilidada de el dinero,
 de acuerdo a las probabilidades que brindas los difrentes equipos,observando el resultado de sus anteriores partidos 
 reconociendo el nivel en el que se encuentra el equipo, se logre visualizar los diferentes factores y 
-tomara una decisión mas satisfactoria y logora desidir en cual partido se pueda invertir. 
+tomara una decisión mas satisfactoria y logora decidir en cual partido se pueda invertir. 
 
 En esta plataforma se pueden ver los equipos activos por los que se pueden realizara las apuestas.
 Donde se puede interactuar con otros usuarios y dar sus opiniones sobre anteriores partidos y dar 
-aproximaciones de los equipoas que tengas mas probabilidad de ganar.Permite etener un inisio de 
-sesión rapido. Todos los usuarios wue esten realizando sus apuestas podran observar los comentarios
+aproximaciones de los equipoas que tengas mas probabilidad de ganar.Permite entener un inicio de 
+sesión rapido. Todos los usuarios que esten realizando sus apuestas podran observar los comentarios
 que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión satisfactoria.
 
 ![Pagina Principal](img/imagen2.PNG)
