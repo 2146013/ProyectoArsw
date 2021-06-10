@@ -18,8 +18,8 @@ aproximaciones de los equipoas que tengas mas probabilidad de ganar.Permite eten
 sesión rapido. Todos los usuarios wue esten realizando sus apuestas podran observar los comentarios
 que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión satisfactoria.
 
-![Pagina Principal](img/imagen2.jpg)
-![Pagina Principal](img/imagen3.jpg)
+![Pagina Principal](img/imagen2.PNG)
+![Pagina Principal](img/imagen3.jpeg)
 # Historias de Usuario 
  Como Usuario 
  quiero saber a que equipos de puede hacer una apuesta  
