@@ -58,3 +58,8 @@ que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión
  
  Se puede observar el marcador de los partidos anteriores que se han realizado entre esos dos equipos
  para que el usuario pueda visualizar esto y tome una decisión acertada.
+ 
+ # 5 leer mensajes anteriores
+ 
+ Se puedan leer los mensajes que han hecho los otros usuarios dentro de la sala que estan los equipos
+ a los que el usuario desea apostar.
