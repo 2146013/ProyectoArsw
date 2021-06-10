@@ -36,3 +36,25 @@ que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión
  como administrador 
  quiero saber cuales son los comentarios del usuario 
  para poder tener en cuenta su opinion y mejorara ofreciendo una repuesta satisfactoria 
+ 
+ # 1 Chat con miembros de FCapuestas
+ 
+ se puede observar las conversaciones entre los miembros de FCapuestas donde pueden dar 
+ su punto de vista sobre los partidos que estan por jugarse.Estimación: valor 9. Criterios de
+ aceptación : Registar su username y entara al partido que desea apostar.
+ 
+ # 2 Personas que entraron a la misma apuesta
+ 
+ Se puede evidenciar cuantas personas han hecho sus apuestas a ese partido y el porcentaje
+ de las apuestas que se han realizado a cada equipo.Estimación: valor 9. Criterio de aceptación: 
+ Registar su username y estar dentro de una sala.
+ 
+ # 3 Se observan los partidos activos 
+ 
+ El usuario pude ver que partidos se pueden realizar apuestas y que partidos ya se jugaron y cuales
+ ya estan cerrados. Estimación: valor 5. Criterio de aceptación: Registar su username
+ 
+ # 4 Observar marcador 
+ 
+ Se puede observar el marcador de los partidos anteriores que se han realizado entre esos dos equipos
+ para que el usuario pueda visualizar esto y tome una decisión acertada.
