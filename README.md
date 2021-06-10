@@ -3,7 +3,7 @@
 ![Pagina Principal](img/imagen1.jpg)
 
 # Resumen 
-Optener rentabilidada y actividades adecuadas de la empresa FC apuestas ser reconocida como una empresa
+Obtener rentabilidada y actividades adecuadas de la empresa FC apuestas ser reconocida como una empresa
 confiabe y segura, ser lider en el mercado de las apuestas, brindarle a los usuarios facilidada dentro 
 de la pagina web parera realizara apuestas.
 
