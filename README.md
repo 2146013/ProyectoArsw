@@ -1,8 +1,8 @@
-### FC Apuestas
+# FC Apuestas
 ## Laura Daniela Pachon Cuan
 ![Pagina Principal](img/imagen1.jpg)
 
-# Resumen 
+### Resumen 
 Obtener rentabilidada y actividades adecuadas de la empresa FC apuestas ser reconocida como una empresa
 confiabe y segura, ser lider en el mercado de las apuestas, brindarle a los usuarios facilidada dentro 
 de la pagina web parera realizara apuestas.
@@ -20,7 +20,7 @@ que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión
 
 ![Pagina Principal](img/imagen2.PNG)
 ![Pagina Principal](img/imagen3.jpeg)
-# Historias de Usuario 
+### Historias de Usuario 
  Como Usuario 
  quiero saber a que equipos de puede hacer una apuesta  
  Para poder ganas dinero
@@ -37,29 +37,29 @@ que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión
  quiero saber cuales son los comentarios del usuario 
  para poder tener en cuenta su opinion y mejorara ofreciendo una repuesta satisfactoria 
  
- # 1 Chat con miembros de FCapuestas
+### 1 Chat con miembros de FCapuestas
  
  se puede observar las conversaciones entre los miembros de FCapuestas donde pueden dar 
  su punto de vista sobre los partidos que estan por jugarse.Estimación: valor 9. Criterios de
  aceptación : Registar su username y entara al partido que desea apostar.
  
- # 2 Personas que entraron a la misma apuesta
+### 2 Personas que entraron a la misma apuesta
  
  Se puede evidenciar cuantas personas han hecho sus apuestas a ese partido y el porcentaje
  de las apuestas que se han realizado a cada equipo.Estimación: valor 9. Criterio de aceptación: 
  Registar su username y estar dentro de una sala.
  
- # 3 Se observan los partidos activos 
+### 3 Se observan los partidos activos 
  
  El usuario pude ver que partidos se pueden realizar apuestas y que partidos ya se jugaron y cuales
  ya estan cerrados. Estimación: valor 5. Criterio de aceptación: Registar su username
  
- # 4 Observar marcador 
+### 4 Observar marcador 
  
  Se puede observar el marcador de los partidos anteriores que se han realizado entre esos dos equipos
  para que el usuario pueda visualizar esto y tome una decisión acertada.
  
- # 5 leer mensajes anteriores
+### 5 leer mensajes anteriores
  
  Se puedan leer los mensajes que han hecho los otros usuarios dentro de la sala que estan los equipos
  a los que el usuario desea apostar.
