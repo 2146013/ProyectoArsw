@@ -2,15 +2,15 @@
 ## Laura Daniela Pachon Cuan
 ![Pagina Principal](img/imagen1.jpg)
 
-# Resumen
+# Resumen 
 Optener rentabilidada y actividades adecuadas de la empresa FC apuestas ser reconocida como una empresa
 confiabe y segura, ser lider en el mercado de las apuestas, brindarle a los usuarios facilidada dentro 
 de la pagina web parera realizara apuestas.
 
-Como usuario de FCapuestas de apuestas en linea se desea gerera rentabilidada de el dinero, de acuerdo 
-a las probabilidades que brindas los difrentes equipos,observando el resultado de sus anteriores partidos 
+En este proyecto Como usuario de FCapuestas de apuestas en linea se desea gerera rentabilidada de el dinero,
+de acuerdo a las probabilidades que brindas los difrentes equipos,observando el resultado de sus anteriores partidos 
 reconociendo el nivel en el que se encuentra el equipo, se logre visualoizar los diferentes factores y 
-tomara un desicion mas satisfactoria y logorara desidir en cual partido se pueda invertir. 
+tomara una decisión mas satisfactoria y logora desidir en cual partido se pueda invertir. 
 
 # Historias de Usuario 
  Como Usuario 
