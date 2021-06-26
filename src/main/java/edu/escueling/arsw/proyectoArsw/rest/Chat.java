@@ -57,17 +57,17 @@ public class Chat {
         if (msgJson.get("tipo").toString().equals("Bot")) {
             if (msgJson.get("mensaje").toString().equals("Se ha unido")) {
 
-                enviarlistadeUsuarios(msgJson);
+                enviarmensajeaSala(msgJson);
 
-            } else if (msgJson.get("message").toString().equals("has left.")) {
+            } else if (msgJson.get("mensaje").toString().equals("Ha abandonado la sala")) {
                 User newUser = buscarUsuarioenSalas(msgJson.get("sala").toString(), msgJson);
                 salas.get(msgJson.get("sala").toString()).remove(newUser);
-                enviarlistadeUsuarios(msgJson);
+                enviarmensajeaSala(msgJson);
             }
         }
     }
-
-    private void enviarlistadeUsuarios(JSONObject msgJson) {
+    //Envia el mensaje a la sala correspondiente
+    private void enviarmensajeaSala(JSONObject msgJson) {
         List<String> listaUsuarios = new ArrayList<String>();
 
         salas.get(msgJson.get("sala").toString()).forEach(user -> {
