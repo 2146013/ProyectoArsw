@@ -1,50 +1,148 @@
 package edu.escueling.arsw.proyectoArsw.rest;
 
-import edu.escueling.arsw.proyectoArsw.entitie.User;
-import org.json.JSONObject;
-import org.springframework.stereotype.Controller;
-
-import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.logging.Level;
+
+import javax.websocket.OnClose;
+import javax.websocket.OnError;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
+import javax.websocket.server.ServerEndpoint;
+
+import edu.escueling.arsw.proyectoArsw.entitie.User;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
+
+
+import java.util.logging.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 @Controller
-@ServerEndpoint("/chat")
+@ServerEndpoint("/apuestasService")
 public class Chat {
+    private static final Logger loge = Logger.getLogger(Chat.class.getName());
+
+    static Queue<Session> sesion = new ConcurrentLinkedQueue<>();
+
+    private Session sesionPropia = null;
+
     static HashMap<String, List<User>> salas = new HashMap<>();
-    private User user;
-    private Session sesionUsuario = null;
 
-    //se añade el usuario a la sala correspondiente donde el dese realizar su apuesta
-    private void anadirUsuario(String sala, JSONObject msgJson) {
+    private User usuario;
 
-        if (buscarUsuarioenSalas(sala, msgJson) == null) {
-            user = crearUsuario(msgJson);
-            salas.get(sala).add(crearUsuario(msgJson));
-        }
+    @OnMessage
+    public void mensaje(String mensaje, Session recibirSesion) {
+
+        this.enviar(mensaje);
     }
 
-    // se busca si e usuario que se unio esta en esa sala
-    private User buscarUsuarioenSalas(String sala, JSONObject msgJson) {
-        return salas.get(sala).stream()
-                .filter(user -> user.getnombre().equals(msgJson.get("username").toString()))
-                .findFirst().orElse(null);
+    @OnOpen
+    public void abrirConexion(Session recibirSesion) {
+
+        sesion.add(recibirSesion);
+        sesionPropia = recibirSesion;
+        loge.log(Level.INFO, "Connection opened.");
+        try {
+            recibirSesion.getBasicRemote().sendText("Connection established.");
+
+        } catch (IOException e) {
+            loge.log(Level.SEVERE, null, e);
+        }
+
+    }
+
+    @OnClose
+    public void cerrarConexion(Session recibirSesion) {
+        sesion.remove(recibirSesion);
+
+        loge.log(Level.INFO, "Connection closed.");
+    }
+
+    @OnError
+    public void error(Session recibirSesion, Throwable t) {
+        sesion.remove(recibirSesion);
+        loge.log(Level.INFO, t.toString());
+        loge.log(Level.INFO, "Connection error.");
     }
 
     private User crearUsuario(JSONObject msgJson) {
-        return new User(msgJson.get("username").toString(), msgJson.get("room").toString(), sesionUsuario);
+        return new User(msgJson.get("nombreusuario").toString(), msgJson.get("sala").toString(), sesionPropia);
+    }
+    private void mensajeBot(JSONObject msgJson) {
+        if (msgJson.get("tipo").toString().equals("ApuestasBot")) {
+            if (msgJson.get("message").toString().equals("has joined.")) {
+
+                listaUsuarios(msgJson);
+
+            } else if (msgJson.get("message").toString().equals("has left.")) {
+
+                User nuevoUsuario = encontrarUsuario(msgJson.get("sala").toString(),msgJson);
+
+                salas.get(msgJson.get("sala").toString()).remove(nuevoUsuario);
+
+                listaUsuarios(msgJson);
+            }
+        }
     }
 
-    //el mennsaje que el usuario hace se envia
-    private void enviarMensaje(String sala, String mensaje) {
 
-        salas.get(sala).forEach(user -> {
+    private JSONObject anadirTiempo(JSONObject msgJson) {
+        LocalDateTime fecha = LocalDateTime.now();
+        DateTimeFormatter hora = DateTimeFormatter.ISO_LOCAL_TIME;
+        String tiempo = fecha.format(hora).toString();
+
+        msgJson.append("time", tiempo);
+
+        return msgJson;
+    }
+
+
+
+    public void enviar(String mensaje) {
+
+        try {
+
+            JSONObject msgJson = new JSONObject(mensaje);
+            String sala = msgJson.get("sala").toString();
+            User usuario;
+            msgJson = anadirTiempo(msgJson);
+
+            if (salas.containsKey(sala)) {
+
+                anadirUsuario(sala, msgJson);
+
+            } else {
+                usuario = crearUsuario(msgJson);
+                List<User> usuarios = new ArrayList<User>();
+                usuarios.add(usuario);
+                salas.put(sala, usuarios);
+            }
+
+            mensajeBot(msgJson);
+            enviarmensaje(sala, msgJson.toString());
+
+        } catch (JSONException e) {
+            loge.log(Level.SEVERE, null, "An error was found JSON.");
+        }
+    }
+    private void enviarmensaje(String sala, String mensaje) {
+
+        salas.get(sala).forEach(usuario -> {
             try {
 
-                user.getsesion().getBasicRemote().sendText(mensaje);
+                usuario.getSession().getBasicRemote().sendText(mensaje);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -52,32 +150,36 @@ public class Chat {
         });
     }
 
-    //revisar si es un mensaje es enviado por la maquina
-    private void mensajedelbot(JSONObject msgJson) {
-        if (msgJson.get("tipo").toString().equals("Bot")) {
-            if (msgJson.get("mensaje").toString().equals("Se ha unido")) {
+    private void anadirUsuario(String sala, JSONObject msgJson) {
 
-                enviarmensajeaSala(msgJson);
-
-            } else if (msgJson.get("mensaje").toString().equals("Ha abandonado la sala")) {
-                User newUser = buscarUsuarioenSalas(msgJson.get("sala").toString(), msgJson);
-                salas.get(msgJson.get("sala").toString()).remove(newUser);
-                enviarmensajeaSala(msgJson);
-            }
+        if (encontrarUsuario(sala,msgJson) == null) {
+            usuario = crearUsuario(msgJson);
+            salas.get(sala).add(crearUsuario(msgJson));
         }
     }
-    //Envia el mensaje a la sala correspondiente
-    private void enviarmensajeaSala(JSONObject msgJson) {
-        List<String> listaUsuarios = new ArrayList<String>();
 
-        salas.get(msgJson.get("sala").toString()).forEach(user -> {
-            listaUsuarios.add("\"" + user.getnombre().toString() + "\"");
+    private User encontrarUsuario(String sala, JSONObject msgJson) {
+        return salas.get(sala).stream()
+                .filter(usuario -> usuario.getUsername().equals(msgJson.get("nombreusuario").toString()))
+                .findFirst().orElse(null);
+    }
+
+
+
+    private void listaUsuarios(JSONObject msgJson) {
+        List<String> usuarios = new ArrayList<String>();
+
+        salas.get(msgJson.get("sala").toString()).forEach(usuario -> {
+            usuarios.add("\"" + usuario.getUsername().toString() + "\"");
         });
         // ;
-        String msg = '{' + "\"userList\"" + ":" + listaUsuarios.toString() + '}';
+        String msg = '{' + "\"userList\"" + ":" + usuarios.toString() + '}';
 
-        enviarMensaje(msgJson.get("sala").toString(), msg);
+        enviarmensaje(msgJson.get("sala").toString(), msg);
 
 
     }
+
+
+
 }

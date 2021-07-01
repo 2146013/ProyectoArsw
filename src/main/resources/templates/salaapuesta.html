@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+          integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+          crossorigin="anonymous" />
+    <!-- ACA IBA EL CSS DE STATIC SIMPLE -->
+    <link href="../static/css/style.css" th:href="@{/css/style.css}"
+          rel="stylesheet" />
+    <title>Chat</title>
+</head>
+<body>
+<a th:href="@{index}" class="btn">Abandonar sala de apuestas</a>
+<div class="row">
+    <div class="">
+        <br>
+        <br>
+        Informacion de la sala
+        Partido actual: 3 -1
+        <br>
+
+    </div>
+    <div class="col">
+
+        <div style="margin-left:51%">
+            <h3>
+                <i class="fas fa-comments-dollar"></i> Nombre sala de apuestas:
+            </h3>
+            <h2 th:text="${sala}" id="room-name"></h2>
+            Lista de usuarios
+            <br>
+            <h3>
+                <i class="fas fa-user"></i></i>Users
+            </h3>
+            <ul id="users">
+            </ul>
+            <div class="chat-container">
+                <header class="chat-header">
+                    <h1>
+                        <i class="fas fa-futbol"></i> Apuestas FC
+                    </h1>
+                </header>
+                <main class="">
+                    <div class="">
+
+                        <div hidden="true" id="nombreusuario" th:text="${nombreusuario}"></div>
+
+                    </div>
+                    <div class="chat-messages">
+                    </div>
+                </main>
+                <div class="chat-form-container">
+                    <form id="chat-form">
+                        <input id="msg" type="text" placeholder="Enter Message" required
+                               autocomplete="off" />
+                        <button id="send" class="btn-2">
+                            <i class="fas fa-paper-plane"></i>Send
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script th:src="@{/js/apuestas.js}"></script>
+<!--  <script src="js/main.js"></script> -->
+</body>
+</html>

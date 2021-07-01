@@ -8,8 +8,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ControlChat {
+    
+    @PostMapping("/index")
+    public String chatForm(Model model) {
+        return "redirect:/salaapuesta";
+    }
+
+    @GetMapping("/salaapuesta")
+    public String salaapuesta(@RequestParam(value = "nombreusuario") String username,
+                       @RequestParam(value = "sala") String room, Model model) {
+        model.addAttribute("sala", room);
+        model.addAttribute("nombreusuario", username);
+        return "salaapuesta";
+    }
     @GetMapping("/")
-    public String formulariosala(Model model) {
+    public String roomForm(Model model) {
         return "/index";
     }
 
@@ -18,16 +31,5 @@ public class ControlChat {
         return "/index";
     }
 
-    @PostMapping("/index")
-    public String formularioChat(Model model) {
-        return "redirect:/salachat";
-    }
 
-    @GetMapping("/salachat")
-    public String chat(@RequestParam(value = "user") String user,
-                       @RequestParam(value = "sala") String sala, Model model) {
-        model.addAttribute("sala", sala);
-        model.addAttribute("user", user);
-        return "salachat";
-    }
 }

@@ -8,17 +8,16 @@ public class User {
 
     private String sala;
 
-    private String nombre;
+    private String nombreusuario;
 
-    private List<String> chatMensajes;
+    private List<String> messages;
 
-    private Session sesion;
+    private Session session;
 
-
-    public User(String nombre, String sala, Session sesion) {
-        this.nombre = nombre;
+    public User(String username, String sala, Session session) {
+        this.nombreusuario = username;
         this.sala = sala;
-        this.sesion = sesion;
+        this.session = session;
     }
 
     public String getsala() {
@@ -29,29 +28,29 @@ public class User {
         this.sala = sala;
     }
 
-    public String getnombre() {
-        return nombre;
+    public String getUsername() {
+        return nombreusuario;
     }
 
-    public void setnombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsername(String username) {
+        this.nombreusuario = username;
     }
 
-    public List<String> getchatMensajes() {
-        return chatMensajes;
+    public List<String> getMessages() {
+        return messages;
     }
 
-    public void setchatMensajes(List<String> chatMensajes) {
-        this.chatMensajes = chatMensajes;
+    public void setMessages(List<String> messages) {
+        this.messages = messages;
     }
 
 
-    public Session getsesion() {
-        return sesion;
+    public Session getSession() {
+        return session;
     }
 
-    public void setsesion(Session sesion) {
-        this.sesion = sesion;
+    public void setSession(Session session) {
+        this.session = session;
     }
 
 
