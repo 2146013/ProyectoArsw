@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ControlChat {
-    
+
     @PostMapping("/index")
     public String chatForm(Model model) {
         return "redirect:/salaapuesta";
