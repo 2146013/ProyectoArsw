@@ -10,6 +10,7 @@
     <!-- ACA IBA EL CSS DE STATIC SIMPLE -->
     <link href="../static/css/style.css" th:href="@{/css/style.css}"
           rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Chat</title>
 </head>
 <body>
@@ -20,6 +21,9 @@
         <br>
         Informacion de la sala
         Partido actual: 3 -1
+        <div id= "container-apuestas-general" class="container-apuestas-general" >
+            asd
+        </div>
         <br>
 
     </div>
@@ -52,7 +56,36 @@
                     <div class="chat-messages">
                     </div>
                 </main>
+
                 <div class="chat-form-container">
+                    <div style="display: inline-block">
+                        <div>
+                            Equipo local
+                            <button id="50KL" value="50" class="">
+                                <i class=""></i>50K
+                            </button>
+                            <button id="100KL" value="100" class="">
+                                <i class=""></i>100K
+                            </button>
+                            <button id="150KL" value="150" class="">
+                                <i class=""></i>150K
+                            </button>
+                        </div>
+                        <div style="margin-right: 10%">
+                            Equipo visitante
+                            <button id="50KV" value="50" class="">
+                                <i class=""></i>50K
+                            </button>
+                            <button id="100KV" value="100" class="">
+                                <i class=""></i>100K
+                            </button>
+                            <button id="150KV" value="150" class="">
+                                <i class=""></i>150K
+                            </button>
+                        </div>
+                    </div>
+
+
                     <form id="chat-form">
                         <input id="msg" type="text" placeholder="Enter Message" required
                                autocomplete="off" />

@@ -42,6 +42,10 @@ public class Chat {
 
     private User usuario;
 
+    private double apuestasSala= 0.0;
+    private double apuestasLocal= 0.0;
+    private double apuestasVisitante= 0.0;
+
     @OnMessage
     public void mensaje(String mensaje, Session recibirSesion) {
 
@@ -94,6 +98,14 @@ public class Chat {
 
                 listaUsuarios(msgJson);
             }
+            else{
+
+              apuestasSala += Double.parseDouble(msgJson.get("valor").toString());
+                System.out.println(apuestasSala);
+              apuestasLocal += Double.parseDouble(msgJson.get("valor").toString());
+              apuestasVisitante += Double.parseDouble(msgJson.get("valor").toString());
+
+            }
         }
     }
 
@@ -138,12 +150,15 @@ public class Chat {
         }
     }
     private void enviarmensaje(String sala, String mensaje) {
-
+        //apuestasSala;
         salas.get(sala).forEach(usuario -> {
             try {
 
                 usuario.getSession().getBasicRemote().sendText(mensaje);
-
+                System.out.println(apuestasSala+" holis");
+                usuario.getSession().getBasicRemote().sendText(Double.toString(apuestasSala),true);
+                usuario.getSession().getBasicRemote().sendText(Double.toString(apuestasLocal),true);
+                usuario.getSession().getBasicRemote().sendText(Double.toString(apuestasVisitante),true);
             } catch (IOException e) {
                 e.printStackTrace();
             }
