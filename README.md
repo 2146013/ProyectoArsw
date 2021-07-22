@@ -20,6 +20,7 @@ que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión
 
 ![Pagina Principal](img/imagen2.PNG)
 ![Pagina Principal](img/imagen3.jpeg)
+
 ### Historias de Usuario 
  Como Usuario 
  quiero saber a que equipos de puede hacer una apuesta  
@@ -32,7 +33,7 @@ que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión
  Como usuario 
  quiero saber la cantidades de usuarios que le han apostado a un equipo
  para poder decidir en cual depositar mi dinero 
- 
+  
  como administrador 
  quiero saber cuales son los comentarios del usuario 
  para poder tener en cuenta su opinion y mejorara ofreciendo una repuesta satisfactoria 
@@ -63,3 +64,37 @@ que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión
  
  Se puedan leer los mensajes que han hecho los otros usuarios dentro de la sala que estan los equipos
  a los que el usuario desea apostar.
+ 
+ 
+  Esta Aplicación que utiliza Heroku para desplegar la sala de apuestas donde varios ususrios pueden interactuar entree ellos y 
+ comunicarse para tomara una decisión optima para su apuesta 
+[https://app-proyectoarsw.herokuapp.com/]
+## Instrucciones de uso
+
+* Java versión: 1.8.0
+
+### Ejecución
+
+En el sigiente lik de Github 
+[https://github.com/2146013/ProyectoArsw.git]
+
+podras encontarra la aplicacion de mi proyecto se encuentra en el gir como ProyectoArsw
+para correr el proyecto puden usara mvn spring-boot:run,se abrira la ventana 
+donde podra hablar e interactuar con otros usuarios haciedo uso de varias pantallas para apostar en la sala que desee
+
+El tablero se corre en localhost:8080
+
+## Tecnologias
+* Maven
+* Java
+* Springboot
+* Heroku
+* React
+* P5.js
+
+## Autor
+* Laura Daniela Pachon Cuan  - Fecha: 08/07/2021
+
+## Licencia
+This project is licensed under the MIT License - see the LICENSE file for details
+
