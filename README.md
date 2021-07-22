@@ -1,6 +1,6 @@
 # FC Apuestas
 ## Laura Daniela Pachon Cuan
-![Pagina Principal]![imagen3c](https://user-images.githubusercontent.com/60073527/126652058-cd0f69f4-8cbb-4a69-b6b1-03c5ecb12f0e.jpg)
+![imagen3c](https://user-images.githubusercontent.com/60073527/126652058-cd0f69f4-8cbb-4a69-b6b1-03c5ecb12f0e.jpg)
 
 
 ### Resumen 
@@ -19,7 +19,8 @@ aproximaciones de los equipoas que tengas mas probabilidad de ganar.Permite ente
 sesión rapido. Todos los usuarios que esten realizando sus apuestas podran observar los comentarios
 que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión satisfactoria.
 
-![imagen3c](https://user-images.githubusercontent.com/60073527/126652127-7a278572-737a-48b8-a209-94ceb03249f2.jpg)
+<img width="953" alt="imagen1a" src="https://user-images.githubusercontent.com/60073527/126652278-69f687c7-b5d5-4f7b-9794-742aa60dff52.PNG">
+
 ![imagen2b](https://user-images.githubusercontent.com/60073527/126652129-a81704f5-03fa-46c0-bee2-77d962df09cc.jpg)
 
 
