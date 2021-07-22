@@ -3,7 +3,7 @@ function ChatServiceURL() {
 }
 
 
-
+var isMessageApuestaLocal= "";
 class WSChatChanel {
     constructor(URL, callback){
 
@@ -26,21 +26,74 @@ class WSChatChanel {
 
 
     onMessage(evt){
+        var parsed;
         console.log("On Message: ",evt);
-        if(evt.data != "Connection established."){
+        if (isNaN(evt.data)  ){
+
+                try{
+                    parsed = JSON.parse(evt.data);
+                    console.log("entra parsejson &&&&&&&&&&&&&")
+
+                }
+                catch (e){
+
+
+                        parsed=  evt.data;
+                        console.log("entra catcht normi &&&&&&&&&&&&&")
+
+                }
+
+
+
+
+        }
+        else{
+
+                parsed= parseInt(evt.data)
+                console.log("entra parseint &&&&&&&&&&&&&")
+
+        }
+        console.log(parsed,"qye es parsed?")
+        if(evt.data != "Connection established." && (parsed !== "apuestalocal" && parsed !== "apuestavisitante" ) &&  parsed != "number" &&parsed != undefined){
+            console.log(evt.data,parsed,parsed !== "apuestavisitante")
             this.received(evt.data);
         }
-        console.log(evt,evt.returnValue,"return value?",evt.returnValue==true)
-        var parsed = JSON.parse(evt.data);
-        if(typeof parsed == "number"){
+        console.log(evt,evt.returnValue,"return value?",evt.returnValue==true,typeof parsed, parsed,"///////////////7")
 
+        if(typeof parsed =="string" && parsed == "apuestalocal"){
+            isMessageApuestaLocal = true;
+        }
+        if(typeof parsed =="string" && parsed == "apuestavisitante"){
+            isMessageApuestaLocal = false;
+        }
+        if(typeof parsed == "number" && isMessageApuestaLocal == true){
+
+            console.log(parsed,'parseado',typeof parsed)
+            console.log()
+            document.getElementById("container-apuestas-locales").innerHTML = `<p class="meta">${parseInt(evt.data)}</p>`;
+
+
+            console.log("recibe mensaje ev.data", evt.data)
+            console.log("salaapuestas",salaapuestas,"ev.data",evt.data)
+            document.getElementById("container-apuestas-general").innerHTML = `<p class="meta">${parseInt(evt.data)}</p>`;
+
+            salaapuestas = parseInt(evt.data)
+            localapuestas = parseInt(evt.data)
+            //localapuestas = parse
+        }
+        console.log(typeof parsed == "number" && isMessageApuestaLocal == false , typeof parsed , isMessageApuestaLocal )
+        if(typeof parsed == "number" && isMessageApuestaLocal == false){
             console.log(parsed,'parseado')
             console.log()
+            document.getElementById("container-apuestas-visitantes").innerHTML = `<p class="meta">${parseInt(evt.data)}</p>`;
             document.getElementById("container-apuestas-general").innerHTML = `<p class="meta">${parseInt(evt.data)}</p>`;
+
+
             console.log("recibe mensaje ev.data", evt.data)
             console.log("salaapuestas",salaapuestas,"ev.data",evt.data)
             salaapuestas = parseInt(evt.data)
-            localapuestas = parse
+            visitanteapuestas = parseInt(evt.data)
+            //localapuestas = parse
         }
         else{
           salaapuestas = salaapuestas
@@ -48,7 +101,8 @@ class WSChatChanel {
     }
 
     sendToServer(tipo,user,room,message,valor){
-        let msg = `{ "tipo": "${tipo}", "sala": "${room}" , "nombreusuario": "${user}" , "message": "${message}","valor": "${valor}" }`;
+
+        let msg = `{ "tipo": "${tipo}", "sala": "${room}" , "nombreusuario": "${user}" , "message": "${message}","valor": "${valor}" ,"valorLocal":"${isLocalApuesta?valor:0}","valorVisitante":"${isLocalApuesta?0:valor}"}`;
         this.wsocket.send(msg);
 
     }
@@ -123,153 +177,94 @@ function userMessage(mensaje){
 }
 var salaapuestas= 0;
 var localapuestas=0;
+var isLocalApuesta=false;
 var visitanteapuestas=0;
+var apuestaactual=0;
 var sp1 = document.querySelector('.container-apuestas-general');
+var sl1 = document.querySelector('.container-apuestas-locales');
+var sv1 = document.querySelector('.container-apuestas-visitantes');
 
 const apuesta50L = document.getElementById('50KL').addEventListener('click',(e)=>{
     console.log(e);
     var val= 50;
+    isLocalApuesta = true;
     const msg=  'Ha apostado 50 K por equipo local';
-    salaapuestas+=50;
-    localapuestas += 50;
+    apuestaactual=50;
+    salaapuestas+=apuestaactual;
+    localapuestas += apuestaactual;
     console.log( msg)
-    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,50);
-
-
-    //const div = document.createElement('div');
-    //sp1.setAttribute("id", "container-apuestas-general");
+    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,apuestaactual);
 
 
 
-    //div.innerHTML = `<p class="meta">${salaapuestas}</p>
-	//`;
-   // sp1.appendChild(div);
-// crear algún contenido para el nuevo elemento
-    //var sp1_content = document.createTextNode("Nuevo elemento span para reemplazo.");
-
-// aplicar dicho contenido al nuevo elemento
-   // sp1.appendChild(sp1_content);
-   // $( "#container-apuestas-general" ).load(window.location.href + " #container-apuestas-general" );
 });
 const apuesta100L = document.getElementById('100KL').addEventListener('click',(e)=>{
     console.log(e);
     var val= 1000;
     const msg=  'Ha apostado 100 K por equipo local';
-    salaapuestas+=100;
+    apuestaactual=100;
+    salaapuestas+=apuestaactual;
+    localapuestas += apuestaactual;
+    //salaapuestas+=100;
     console.log( msg)
-    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,100);
-
-
-    //const div = document.createElement('div');
-    //sp1.setAttribute("id", "container-apuestas-general");
+    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,apuestaactual);
 
 
 
-    //div.innerHTML = `<p class="meta">${salaapuestas}</p>
-    //`;
-    // sp1.appendChild(div);
-// crear algún contenido para el nuevo elemento
-    //var sp1_content = document.createTextNode("Nuevo elemento span para reemplazo.");
-
-// aplicar dicho contenido al nuevo elemento
-    // sp1.appendChild(sp1_content);
-    // $( "#container-apuestas-general" ).load(window.location.href + " #container-apuestas-general" );
 });
 const apuesta150L = document.getElementById('150KL').addEventListener('click',(e)=>{
     console.log(e);
     var val= 150;
     const msg=  'Ha apostado 150 K por equipo local';
-    salaapuestas+=150;
+
+    apuestaactual=150;
+    salaapuestas+=apuestaactual;
+    localapuestas += apuestaactual;
     console.log( msg)
-    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,150);
+    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,apuestaactual);
 
 
-    //const div = document.createElement('div');
-    //sp1.setAttribute("id", "container-apuestas-general");
-
-
-
-    //div.innerHTML = `<p class="meta">${salaapuestas}</p>
-    //`;
-    // sp1.appendChild(div);
-// crear algún contenido para el nuevo elemento
-    //var sp1_content = document.createTextNode("Nuevo elemento span para reemplazo.");
-
-// aplicar dicho contenido al nuevo elemento
-    // sp1.appendChild(sp1_content);
-    // $( "#container-apuestas-general" ).load(window.location.href + " #container-apuestas-general" );
-});
+    });
 const apuesta50V = document.getElementById('50KV').addEventListener('click',(e)=>{
     console.log(e);
     var val= 50;
     const msg=  'Ha apostado 50 K por equipo Visitante';
-    salaapuestas+=50;
+    //salaapuestas+=50;
+    apuestaactual=50;
+    salaapuestas+=apuestaactual;
+    visitanteapuestas += apuestaactual;
     console.log( msg)
-    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,50);
-
-
-    //const div = document.createElement('div');
-    //sp1.setAttribute("id", "container-apuestas-general");
+    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,apuestaactual);
 
 
 
-    //div.innerHTML = `<p class="meta">${salaapuestas}</p>
-    //`;
-    // sp1.appendChild(div);
-// crear algún contenido para el nuevo elemento
-    //var sp1_content = document.createTextNode("Nuevo elemento span para reemplazo.");
-
-// aplicar dicho contenido al nuevo elemento
-    // sp1.appendChild(sp1_content);
-    // $( "#container-apuestas-general" ).load(window.location.href + " #container-apuestas-general" );
 });
 const apuesta100V = document.getElementById('100KV').addEventListener('click',(e)=>{
     console.log(e);
     var val= 1000;
     const msg=  'Ha apostado 100 K por equipo visitante';
-    salaapuestas+=100;
+    //salaapuestas+=100;
+    apuestaactual=100;
+    salaapuestas+=apuestaactual;
+    visitanteapuestas += apuestaactual;
     console.log( msg)
-    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,100);
-
-
-    //const div = document.createElement('div');
-    //sp1.setAttribute("id", "container-apuestas-general");
+    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,apuestaactual);
 
 
 
-    //div.innerHTML = `<p class="meta">${salaapuestas}</p>
-    //`;
-    // sp1.appendChild(div);
-// crear algún contenido para el nuevo elemento
-    //var sp1_content = document.createTextNode("Nuevo elemento span para reemplazo.");
-
-// aplicar dicho contenido al nuevo elemento
-    // sp1.appendChild(sp1_content);
-    // $( "#container-apuestas-general" ).load(window.location.href + " #container-apuestas-general" );
 });
 const apuesta150V = document.getElementById('150KV').addEventListener('click',(e)=>{
     console.log(e);
     var val= 150;
     const msg=  'Ha apostado 150 K por equipo visitante';
-    salaapuestas+=150;
+    //salaapuestas+=150;
+    apuestaactual=150;
+    salaapuestas+=apuestaactual;
+    visitanteapuestas += apuestaactual;
     console.log( msg)
-    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,150);
+    comunnicationWS.sendToServer("ApuestasBot",nombreusuario,chatRoom,msg ,apuestaactual);
 
 
-    //const div = document.createElement('div');
-    //sp1.setAttribute("id", "container-apuestas-general");
-
-
-
-    //div.innerHTML = `<p class="meta">${salaapuestas}</p>
-    //`;
-    // sp1.appendChild(div);
-// crear algún contenido para el nuevo elemento
-    //var sp1_content = document.createTextNode("Nuevo elemento span para reemplazo.");
-
-// aplicar dicho contenido al nuevo elemento
-    // sp1.appendChild(sp1_content);
-    // $( "#container-apuestas-general" ).load(window.location.href + " #container-apuestas-general" );
 });
 
 
