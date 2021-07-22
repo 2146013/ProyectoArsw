@@ -1,6 +1,7 @@
 # FC Apuestas
 ## Laura Daniela Pachon Cuan
-![Pagina Principal](img/imagen1.jpg)
+![Pagina Principal]![imagen3c](https://user-images.githubusercontent.com/60073527/126652058-cd0f69f4-8cbb-4a69-b6b1-03c5ecb12f0e.jpg)
+
 
 ### Resumen 
 Obtener rentabilidada y actividades adecuadas de la empresa FC apuestas ser reconocida como una empresa
@@ -18,8 +19,9 @@ aproximaciones de los equipoas que tengas mas probabilidad de ganar.Permite ente
 sesión rapido. Todos los usuarios que esten realizando sus apuestas podran observar los comentarios
 que se realicen sobre los partidos y tenerlos en cuenta para tomar una decisión satisfactoria.
 
-![Pagina Principal](img/imagen2.PNG)
-![Pagina Principal](img/imagen3.jpeg)
+![imagen3c](https://user-images.githubusercontent.com/60073527/126652127-7a278572-737a-48b8-a209-94ceb03249f2.jpg)
+![imagen2b](https://user-images.githubusercontent.com/60073527/126652129-a81704f5-03fa-46c0-bee2-77d962df09cc.jpg)
+
 
 ### Historias de Usuario 
  Como Usuario 
